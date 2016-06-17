@@ -19,5 +19,10 @@ public interface AbstractMachineService {
      */
     public AbstractMachineCache init(String control,String denv);
 
+    /**
+     * 运行结果
+     * @param abstractMachineCache
+     * @return
+     */
     public String Run(AbstractMachineCache abstractMachineCache);
 }

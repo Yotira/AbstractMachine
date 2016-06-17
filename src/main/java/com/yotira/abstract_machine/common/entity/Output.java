@@ -8,12 +8,16 @@ import java.util.List;
  */
 public class Output {
 
+    // 控制语句
     private String control;
 
+    // 动态环境
     private String denv;
 
+    // 栈
     private String stack;
 
+    // 当前使用规则
     private List<String> rule;
 
     public String getControl() {
