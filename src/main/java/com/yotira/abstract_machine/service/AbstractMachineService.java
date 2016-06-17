@@ -2,6 +2,8 @@ package com.yotira.abstract_machine.service;/**
  * Created by Administrator on 2016/6/16.
  */
 
+import com.yotira.abstract_machine.common.cache.AbstractMachineCache;
+
 /**
  * AbstractMachineService
  *
@@ -10,5 +12,12 @@ package com.yotira.abstract_machine.service;/**
  */
 public interface AbstractMachineService {
 
-    public String Run();
+    /**
+     * 初始化控制语句和动态变量
+     * @param control
+     * @param denv
+     */
+    public AbstractMachineCache init(String control,String denv);
+
+    public String Run(AbstractMachineCache abstractMachineCache);
 }

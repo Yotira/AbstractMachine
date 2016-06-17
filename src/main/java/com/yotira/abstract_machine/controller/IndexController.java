@@ -24,9 +24,10 @@ public class IndexController{
         return "index";
     }
 
-   /* @RequestMapping(value = "out",method = RequestMethod.POST)
+    @RequestMapping(value = "out",method = RequestMethod.POST)
     public String index(@RequestParam("control") String control,
                         @RequestParam("denv") String denv){
-
-    }*/
+        abstractMachineService.Run();
+        return "";
+    }
 }
