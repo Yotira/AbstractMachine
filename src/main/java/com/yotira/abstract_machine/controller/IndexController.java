@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.AbstractController;
 @RequestMapping(value = "")
 public class IndexController{
 
-    @Autowired
+    /*@Autowired
     private AbstractMachineService abstractMachineService;
 
     @RequestMapping(value = "",method = RequestMethod.GET)
@@ -29,5 +29,5 @@ public class IndexController{
                         @RequestParam("denv") String denv){
         abstractMachineService.Run();
         return "";
-    }
+    }*/
 }
