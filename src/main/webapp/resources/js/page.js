@@ -1,11 +1,5 @@
 (function(){
 	var
-		control = $('.J_control').val(),
-		denv = $('.J_denv').val(),
-		data = {
-			control:control,
-			denv:denv
-		},
 		//单步执行用到的
 		i=0,
 		length,
@@ -14,7 +8,10 @@
 	$('.J_run').on('click', function(){
 		var 
 			length,
-			newVal;
+			newVal,
+			control = $('.J_control').val(),
+			denv = $('.J_denv').val();
+
 		$.post('http://localhost:8080/calculate', {control:control,denv:denv}, function(data){
 			$('.J_control').val("");
 			$('.J_stack').val("");
@@ -27,6 +24,9 @@
 	})
 	//单步
 	$('.J_submit').on('click', function(){
+		var
+			control = $('.J_control').val(),
+			denv = $('.J_denv').val();
 		if($('.J_submit').attr('hasSubmit') == 0){
 			$.post('http://localhost:8080/calculate', {control:control,denv:denv}, function(data){
 				console.log(data);

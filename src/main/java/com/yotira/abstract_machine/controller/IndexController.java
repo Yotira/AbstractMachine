@@ -34,16 +34,18 @@ public class IndexController{
 
     @RequestMapping(value = "calculate",method = RequestMethod.POST)
     @ResponseBody
-    public JSONArray index(@RequestParam("control") String control,
+    public JSONObject index(@RequestParam("control") String control,
                             @RequestParam("denv") String denv){
         System.err.println(control + "   " + denv);
         AbstractMachineCache mc = new AbstractMachineCache();
-        JSONArray jsonArray = new JSONArray();
+        JSONObject jsonObject = new JSONObject();
 
+        JSONArray jsonArray = new JSONArray();
         mc = abstractMachineService.init(control, denv);
         List<Output> outputList = abstractMachineService.Run(mc);
         jsonArray = JSONArray.parseArray(JSON.toJSONString(outputList));
+        jsonObject.put("list", jsonArray);
         System.err.println(jsonArray);
-        return jsonArray;
+        return jsonObject;
     }
 }

@@ -48,7 +48,7 @@
                                         <input type="text" class="form-control J_stack" placeholder="Stack">
                                     </div>
                                     <div class="form-group to-animate">
-                                        <label for="phone" class="sr-only">DEnv</label>
+                                        <label class="sr-only">DEnv</label>
                                         <input type="text"class="form-control J_denv" placeholder="DEnv">
                                     </div>
                                 </div>
