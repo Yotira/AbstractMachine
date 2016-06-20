@@ -16,7 +16,7 @@
 			$('.J_control').val("");
 			$('.J_stack').val("");
 			for(j = 0; j < data.list.length; j++){
-				newVal = $('.J_list').val() + '\r\n' + data.list[j].list + data.list[j].rule;
+				newVal = $('.J_list').val() + '\r\n' + data.list[j].list + '\r\n'+ data.list[j].rule;
 				$('.J_list').val(newVal).addClass('in');
 			}
 			$('.J_run').val('END');

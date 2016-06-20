@@ -33,12 +33,12 @@
                 <div class="fh5co-section-content">
                     <div class="row">
 
-                        <div class="col-md-3">
+                        <div class="col-md-2">
                         </div>
 
-                        <div class="col-md-8 col-md-push-1">
+                        <div class="col-md-10 col-md-push-1">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-5">
                                     <div class="form-group to-animate">
                                         <label for="name" class="sr-only">Control</label>
                                         <input type="text" id="name" class="form-control J_control" placeholder="Control">
@@ -52,7 +52,7 @@
                                         <input type="text"class="form-control J_denv" placeholder="DEnv">
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="form-group to-animate">
                                         <label for="message" class="sr-only">message</label>
                                         <textarea name="" id="message" cols="30" rows="5" class="form-control J_list" placeholder=""></textarea>
