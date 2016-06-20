@@ -11,14 +11,14 @@ public class Output {
     // 控制语句
     private String control;
 
-    // 动态环境
-    private String denv;
-
     // 栈
     private String stack;
 
     // 当前使用规则
-    private List<String> rule;
+    private String rule;
+
+    //当前语句完整结果
+    private String list;
 
     public String getControl() {
         return control;
@@ -26,14 +26,6 @@ public class Output {
 
     public void setControl(String control) {
         this.control = control;
-    }
-
-    public String getDenv() {
-        return denv;
-    }
-
-    public void setDenv(String denv) {
-        this.denv = denv;
     }
 
     public String getStack() {
@@ -44,11 +36,19 @@ public class Output {
         this.stack = stack;
     }
 
-    public List<String> getRule() {
+    public String getRule() {
         return rule;
     }
 
-    public void setRule(List<String> rule) {
+    public void setRule(String rule) {
         this.rule = rule;
+    }
+
+    public String getList() {
+        return list;
+    }
+
+    public void setList(String list) {
+        this.list = list;
     }
 }

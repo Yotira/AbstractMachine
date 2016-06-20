@@ -3,6 +3,9 @@ package com.yotira.abstract_machine.service;/**
  */
 
 import com.yotira.abstract_machine.common.cache.AbstractMachineCache;
+import com.yotira.abstract_machine.common.entity.Output;
+
+import java.util.List;
 
 /**
  * AbstractMachineService
@@ -24,5 +27,5 @@ public interface AbstractMachineService {
      * @param abstractMachineCache
      * @return
      */
-    public String Run(AbstractMachineCache abstractMachineCache);
+    public List<Output> Run(AbstractMachineCache abstractMachineCache);
 }

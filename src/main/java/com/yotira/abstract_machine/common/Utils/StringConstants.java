@@ -24,6 +24,4 @@ public final class StringConstants {
 
     public static final String OP = "分解规则:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)";
 
-
-
 }
