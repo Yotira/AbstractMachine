@@ -1,0 +1,16 @@
+.title{
+	height:100px;
+	text-align:center;
+	font-size: 36px;
+	padding-top: 30px;
+}
+
+.fh5co-section-seperator.fh5co-section-seperator-white .in{
+	background: white;
+    color: #000;
+}
+
+#message{
+	overflow-y:auto;
+	overflow-x:auto;
+}
