@@ -8,16 +8,16 @@ import java.util.List;
  */
 public class Output {
 
-    // ¿ØÖÆÓï¾ä
+    // æ§åˆ¶è¯­å¥
     private String control;
 
-    // ¶¯Ì¬»·¾³
+    // åŠ¨æ€ç¯å¢ƒ
     private String denv;
 
-    // Õ»
+    // æ ˆ
     private String stack;
 
-    // µ±Ç°Ê¹ÓÃ¹æÔò
+    // å½“å‰ä½¿ç”¨è§„åˆ™
     private List<String> rule;
 
     public String getControl() {

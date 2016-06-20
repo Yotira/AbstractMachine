@@ -6,10 +6,10 @@ package com.yotira.abstract_machine.common.entity;
  */
 public class StackTopTwo {
 
-    // Õ»¶¥µÄµÚÒ»¸öÊý
+    // æ ˆé¡¶çš„ç¬¬ä¸€ä¸ªæ•°
     private Integer num1;
 
-    // Õ»¶¥µÄµÚ¶þ¸öÊý
+    // æ ˆé¡¶çš„ç¬¬äºŒä¸ªæ•°
     private Integer num2;
 
     public Integer getNum1() {

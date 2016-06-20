@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class Control {
 
-    // ¿ØÖÆÓï¾ä
+    // æ§åˆ¶è¯­å¥
     private String control;
 
     public String getControl() {

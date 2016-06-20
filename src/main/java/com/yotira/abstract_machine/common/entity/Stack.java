@@ -6,7 +6,7 @@ package com.yotira.abstract_machine.common.entity;
  */
 public class Stack {
 
-    // ջ
+    // 栈
     private String stack;
 
     public String getStack() {

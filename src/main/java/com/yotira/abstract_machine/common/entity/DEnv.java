@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class DEnv {
 
-    // ¶¯Ì¬±äÁ¿
+    // åŠ¨æ€å˜é‡
     private  Map<String,Integer>  denv;
 
     public Map<String, Integer> getDenv() {

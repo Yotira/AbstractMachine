@@ -25,23 +25,23 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     private String stack[] = new String[111];
     private Map<String, Integer> Denv = new HashMap<String, Integer>();*/
 
-    // »º´æ
+    // ç¼“å­˜
     AbstractMachineCache abstractMachineCache = new AbstractMachineCache();
 
-    // ´ı´¦Àí¿ØÖÆÓï¾ä¸öÊı¡¢Õ»¶¥
+    // å¾…å¤„ç†æ§åˆ¶è¯­å¥ä¸ªæ•°ã€æ ˆé¡¶
     private int ctrlsize;
     private int stacktop;
 
     public AbstractMachineCache init(String controlInput, String denvInput){
 
-        // ×Ö·û´®Êı×é£¬³õÊ¼³¤¶ÈÎª1£¬Ö»ÓĞcontrolInput
+        // å­—ç¬¦ä¸²æ•°ç»„ï¼Œåˆå§‹é•¿åº¦ä¸º1ï¼Œåªæœ‰controlInput
         String ctrl[] = new String[111];
         ctrl[ctrlsize ++] = controlInput;
         abstractMachineCache.setCtrlsize(ctrlsize);
 
-        // ³õÊ¼»¯¶¯Ì¬±äÁ¿
+        // åˆå§‹åŒ–åŠ¨æ€å˜é‡
         DEnv denv = init_Denv(denvInput);
-        // ½«ÊäÈëµÄ¿ØÖÆÓï¾äºÍ¶¯Ì¬±äÁ¿·ÅÈë»º´æ
+        // å°†è¾“å…¥çš„æ§åˆ¶è¯­å¥å’ŒåŠ¨æ€å˜é‡æ”¾å…¥ç¼“å­˜
         abstractMachineCache.setControl(ctrl);
         abstractMachineCache.setDenv(denv);
         return abstractMachineCache;
@@ -52,7 +52,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         String out = "";
         String[] stack = abstractMachineCache.getStack();
         while(ctrlsize > 0) {
-            // »ñÈ¡µ±Ç°Òª´¦ÀíµÄ×Ö·û´®£¬¿ØÖÆÓï¾äÊı×éµÄ×îºóÒ»¸ö£¨Êı×éÊÇµ¹×Å´æµÄ£©
+            // è·å–å½“å‰è¦å¤„ç†çš„å­—ç¬¦ä¸²ï¼Œæ§åˆ¶è¯­å¥æ•°ç»„çš„æœ€åä¸€ä¸ªï¼ˆæ•°ç»„æ˜¯å€’ç€å­˜çš„ï¼‰
             String now = abstractMachineCache.getControl()[abstractMachineCache.getCtrlsize()-1];
             ctrlsize --;
             String fir = getfirString(now);
@@ -82,13 +82,13 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
                 else gaoDiv(abstractMachineCache);
             }
             else if(fir.equals("cons")) {
-                System.out.println("³£Á¿¹æÔò£º(vs, const(c):e, sita) => (c:vs, e, sita)");
-                // ³£Á¿ÈëÕ»
+                System.out.println("å¸¸é‡è§„åˆ™ï¼š(vs, const(c):e, sita) => (c:vs, e, sita)");
+                // å¸¸é‡å…¥æ ˆ
                 stack[stacktop ++] = getAll(now);
             }
             else {
-                System.out.println("±äÁ¿¹æÔò£º(vs, var(c):e, sita) => (sita(x):vs, e, sita)");
-                // ±äÁ¿ÏÈÕÒ¶¯Ì¬»·¾³Öµ£¬¸³ÖµºóÈëÕ»
+                System.out.println("å˜é‡è§„åˆ™ï¼š(vs, var(c):e, sita) => (sita(x):vs, e, sita)");
+                // å˜é‡å…ˆæ‰¾åŠ¨æ€ç¯å¢ƒå€¼ï¼Œèµ‹å€¼åå…¥æ ˆ
                 stack[stacktop ++] = String.valueOf(abstractMachineCache.getDenv().getDenv().get(getAll(now)));
             }
             out = "Control: [";
@@ -129,12 +129,12 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoDiv(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("³ı·¨¹æÔò£º(n1:n2:vs, div:e, sita) => (n:vs, e, sita), n= n1/n2");
-        // È¡³öÕ»¶¥µÄÁ½¸öÖµ
-        System.out.println("³Ë·¨¹æÔò£º(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
+        System.out.println("é™¤æ³•è§„åˆ™ï¼š(n1:n2:vs, div:e, sita) => (n:vs, e, sita), n= n1/n2");
+        // å–å‡ºæ ˆé¡¶çš„ä¸¤ä¸ªå€¼
+        System.out.println("ä¹˜æ³•è§„åˆ™ï¼š(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
-        // ¼ÆËã
+        // è®¡ç®—
         stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() / stackTopTwo.getNum2());
         abstractMachineCache.setStack(stack);
         return StringConstants.DEV;
@@ -142,7 +142,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoMul(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("³Ë·¨¹æÔò£º(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
+        System.out.println("ä¹˜æ³•è§„åˆ™ï¼š(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
         stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() * stackTopTwo.getNum2());
@@ -152,7 +152,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoSub(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("¼õ·¨¹æÔò£º(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2");
+        System.out.println("å‡æ³•è§„åˆ™ï¼š(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
         stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() - stackTopTwo.getNum2());
@@ -162,7 +162,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoAdd(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("¼Ó·¨¹æÔò£º(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2");
+        System.out.println("åŠ æ³•è§„åˆ™ï¼š(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
         stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() + stackTopTwo.getNum2());
@@ -172,7 +172,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoSe(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("±È½Ï¹æÔò£º(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)");
+        System.out.println("æ¯”è¾ƒè§„åˆ™ï¼š(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
         if(stackTopTwo.getNum1() <= stackTopTwo.getNum2()) {
@@ -185,7 +185,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String gaoGe(AbstractMachineCache abstractMachineCache) {
         // TODO Auto-generated method stub
-        System.out.println("±È½Ï¹æÔò£º(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)");
+        System.out.println("æ¯”è¾ƒè§„åˆ™ï¼š(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
         if(stackTopTwo.getNum1() >= stackTopTwo.getNum2()){
@@ -215,7 +215,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
     private String Devide(String now) {
         // TODO Auto-generated method stub
-        System.out.println("·Ö½â¹æÔò:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)");
+        System.out.println("åˆ†è§£è§„åˆ™:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)");
         String[] control = abstractMachineCache.getControl();
 
         control[ctrlsize ++] = getfirString(now);
@@ -305,8 +305,8 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     /**
-     * Ë½ÓĞ·½·¨
-     * »ñÈ¡Õ»¶¥µÄÁ½¸öÖµ
+     * ç§æœ‰æ–¹æ³•
+     * è·å–æ ˆé¡¶çš„ä¸¤ä¸ªå€¼
      *
      * @param abstractMachineCache
      * @return

@@ -6,23 +6,23 @@ package com.yotira.abstract_machine.common.Utils;
  */
 public final class StringConstants {
 
-    public static final String CONS = "³£Á¿¹æÔò£º(vs, const(c):e, sita) => (c:vs, e, sita)";
+    public static final String CONS = "å¸¸é‡è§„åˆ™ï¼š(vs, const(c):e, sita) => (c:vs, e, sita)";
 
-    public static final String VAR = "±äÁ¿¹æÔò£º(vs, var(c):e, sita) => (sita(x):vs, e, sita)";
+    public static final String VAR = "å˜é‡è§„åˆ™ï¼š(vs, var(c):e, sita) => (sita(x):vs, e, sita)";
 
-    public static final String DEV = "³ý·¨¹æÔò£º(n1:n2:vs, div:e, sita) => (n:vs, e, sita), n= n1/n2";
+    public static final String DEV = "é™¤æ³•è§„åˆ™ï¼š(n1:n2:vs, div:e, sita) => (n:vs, e, sita), n= n1/n2";
 
-    public static final String MUL = "³Ë·¨¹æÔò£º(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2";
+    public static final String MUL = "ä¹˜æ³•è§„åˆ™ï¼š(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2";
 
-    public static final String ADD = "¼Ó·¨¹æÔò£º(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2";
+    public static final String ADD = "åŠ æ³•è§„åˆ™ï¼š(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2";
 
-    public static final String SUB = "¼õ·¨¹æÔò£º(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2";
+    public static final String SUB = "å‡æ³•è§„åˆ™ï¼š(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2";
 
-    public static final String SE = "±È½Ï¹æÔò£º(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)";
+    public static final String SE = "æ¯”è¾ƒè§„åˆ™ï¼š(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)";
 
-    public static final String GE = "±È½Ï¹æÔò£º(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)";
+    public static final String GE = "æ¯”è¾ƒè§„åˆ™ï¼š(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)";
 
-    public static final String OP = "·Ö½â¹æÔò:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)";
+    public static final String OP = "åˆ†è§£è§„åˆ™:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)";
 
 
 

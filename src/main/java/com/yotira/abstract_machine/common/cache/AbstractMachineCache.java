@@ -11,16 +11,16 @@ import java.util.Map;
  */
 public class AbstractMachineCache {
 
-    // ¿ØÖÆÓï¾ä
+    // æ§åˆ¶è¯­å¥
     private String[] control;
 
-    // ¶¯Ì¬±äÁ¿map
+    // åŠ¨æ€å˜é‡map
     private DEnv denv;
 
-    // Õ»¿Õ¼ä
+    // æ ˆç©ºé—´
     private String[] stack;
 
-    // µ±Ç°Òª´¦ÀíµÄÓï¾ä¸öÊı
+    // å½“å‰è¦å¤„ç†çš„è¯­å¥ä¸ªæ•°
     private Integer ctrlsize;
 
     public String[] getControl() {

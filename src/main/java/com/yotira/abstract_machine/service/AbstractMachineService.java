@@ -13,14 +13,14 @@ import com.yotira.abstract_machine.common.cache.AbstractMachineCache;
 public interface AbstractMachineService {
 
     /**
-     * ³õÊ¼»¯¿ØÖÆÓï¾äºÍ¶¯Ì¬±äÁ¿
+     * åˆå§‹åŒ–æ§åˆ¶è¯­å¥å’ŒåŠ¨æ€å˜é‡
      * @param control
      * @param denv
      */
     public AbstractMachineCache init(String control,String denv);
 
     /**
-     * ÔËĞĞ½á¹û
+     * è¿è¡Œç»“æœ
      * @param abstractMachineCache
      * @return
      */
