@@ -149,7 +149,9 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
             Integer nowStacktop = abstractMachineCache.getStacktop();
             for(int i = nowStacktop - 1; i >= 0; i --) {
                 stackOut += nowStack[i];
-                if(i != 0) stackOut += ", ";
+                if(i != 0) {
+                    stackOut += ", ";
+                }
             }
             output.setStack(stackOut);
 
@@ -158,7 +160,7 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
             //out += "], DEnv: [";
             Boolean flag = false;
             for(Map.Entry<String, Integer> x: abstractMachineCache.getDenv().entrySet()) {
-                if(flag) stackOut += ", ";
+                if(flag) denvOut += ", ";
                 flag = true;
                 denvOut += x.getKey() + "->" + String.valueOf(x.getValue());
             }
@@ -174,7 +176,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
 
 
     private String getAll(String now) {
-        // TODO Auto-generated method stub
         int len = now.length(), i = 0;
         while(i < len && now.charAt(i) != '(') i ++;
         i ++;
@@ -187,8 +188,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoDiv(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
-        //System.out.println("除法规则：(n1:n2:vs, div:e, sita) => (n:vs, e, sita), n= n1/n2");
         // 取出栈顶的两个值
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] stack = abstractMachineCache.getStack();
@@ -203,7 +202,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoMul(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
         //System.out.println("乘法规则：(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] nowStack = abstractMachineCache.getStack();
@@ -215,8 +213,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoSub(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
-        //System.out.println("减法规则：(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
@@ -227,7 +223,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoAdd(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
         //System.out.println("加法规则：(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] nowStack = abstractMachineCache.getStack();
@@ -239,8 +234,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoSe(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
-        //System.out.println("比较规则：(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
@@ -256,8 +249,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String gaoGe(AbstractMachineCache abstractMachineCache) {
-        // TODO Auto-generated method stub
-        //System.out.println("比较规则：(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
         String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
@@ -271,7 +262,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String getfirString(String now) {
-        // TODO Auto-generated method stub
         int len = now.length(), i = 0;
         char c = now.charAt(i);
         while(i < len && (c < 'a' || c > 'z')) {
@@ -288,8 +278,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String Devide(String now) {
-        // TODO Auto-generated method stub
-        //System.out.println("分解规则:(vs, op(e1,e2):e, sita) => (vs, e2:e1:op:e, sita)");
         String[] control = abstractMachineCache.getControl();
         Integer ctrlsize = abstractMachineCache.getCtrlsize();
         control[ctrlsize ++] = getfirString(now);
@@ -304,32 +292,27 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private String getPartone(String now) {
-        // TODO Auto-generated method stub
         int len = now.length(), i = 0;
         while(i < len && now.charAt(i) != '(') i ++;
         i ++;
         String ret = "";
         int cnt = 0;
         while(i < len && now.charAt(i) == ' ') i ++;
-//		System.out.print(i);
         while(i < len && (now.charAt(i) != ',' || cnt != 0)) {
             ret += now.charAt(i);
             if(now.charAt(i) == '(') cnt ++;
             if(now.charAt(i) == ')') cnt --;
             i ++;
         }
-//		System.out.println(" Debug partone: " + ret);
         return ret;
     }
 
     private String getParttwo(String now) {
-        // TODO Auto-generated method stub
         int len = now.length(), i = 0;
         while(i < len && now.charAt(i) != '(') i ++;
         i ++;
         int cnt = 0;
         while(i < len && now.charAt(i) == ' ') i ++;
-//		System.out.print(i);
         while(i < len && (now.charAt(i) != ',' || cnt != 0)) {
             if(now.charAt(i) == '(') cnt ++;
             if(now.charAt(i) == ')') cnt --;
@@ -346,7 +329,6 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
     }
 
     private DEnv init_Denv(String Denv_init) {
-        // TODO Auto-generated method stub
         DEnv denv = new DEnv();
         Map<String, Integer> denvMap = new HashMap<String, Integer>();
 
