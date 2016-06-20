@@ -21,8 +21,7 @@ public class AbstractMachineTest extends AbstractTestCase{
         String control = "ge(add(var(x),mul(cons(2),var(y))),var(z))";
         String denv = "[x->34, y->7, z->50]";
         AbstractMachineCache abstractMachineCache = abstractMachineService.init(control, denv);
-        System.out.println("¿ØÖÆÓï¾ä" + abstractMachineCache.getControl()[0]);
-        System.out.println("¶¯Ì¬±äÁ¿" + abstractMachineCache.getDenv().getDenv().get("x"));
-
+        System.out.println("æ§åˆ¶è¯­å¥" + abstractMachineCache.getControl()[0]);
+        System.out.println("åŠ¨æ€å˜é‡" + abstractMachineCache.getDenv().getDenv());
     }
 }
