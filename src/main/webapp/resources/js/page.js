@@ -1,8 +1,8 @@
 (function(){
 	var
-		//单步执行用到的
-		i=0,
+		i= 0,
 		length,
+		//单步执行用到的
 		responseArray;
 	//一步执行
 	$('.J_run').on('click', function(){
@@ -13,8 +13,9 @@
 			denv = $('.J_denv').val();
 
 		$.post('http://localhost:8080/calculate', {control:control,denv:denv}, function(data){
+			length = data.list.length;
 			$('.J_control').val("");
-			$('.J_stack').val("");
+			$('.J_stack').val(data.list[length-1].stack).addClass('in');
 			for(j = 0; j < data.list.length; j++){
 				newVal = $('.J_list').val() + '\r\n' + data.list[j].list + '\r\n'+ data.list[j].rule;
 				$('.J_list').val(newVal).addClass('in');
@@ -29,7 +30,6 @@
 			denv = $('.J_denv').val();
 		if($('.J_submit').attr('hasSubmit') == 0){
 			$.post('http://localhost:8080/calculate', {control:control,denv:denv}, function(data){
-				console.log(data);
 				responseArray = data.list;
 				length = data.list.length;
 				//第一步
@@ -46,14 +46,13 @@
 			$('.J_control').removeClass('in');
 			$('.J_stack').removeClass('in');
 			$('.J_list').removeClass('in');
-			if(responseArray[i].control){
-				$('.J_control').val(responseArray[i].control).addClass('in');
-			}
+
+			$('.J_control').val(responseArray[i].control).addClass('in');
 			if(responseArray[i].stack){
 				$('.J_stack').val(responseArray[i].stack).addClass('in');
 			}
 			if(responseArray[i].list){
-				newVal = $('.J_list').val() + '\r\n' + responseArray[i].list + responseArray[i].rule;
+				newVal = $('.J_list').val() + '\r\n' + responseArray[i].list + '\r\n' + responseArray[i].rule;
 				$('.J_list').val(newVal).addClass('in');
 			}
 			i++;

@@ -7645,7 +7645,7 @@ p {
 }
 
 #message {
-  height: 130px;
+  height: 290px;
 }
 @media screen and (max-width: 768px) {
   #message {

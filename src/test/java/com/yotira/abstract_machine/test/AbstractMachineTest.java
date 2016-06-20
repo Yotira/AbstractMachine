@@ -44,4 +44,6 @@ public class AbstractMachineTest extends AbstractTestCase{
             System.out.println();
         }
     }
+//    ge(var(z),add(mul(var(x),var(y)),cons(2)))
+//    [x->2, y->10, z->30]
 }

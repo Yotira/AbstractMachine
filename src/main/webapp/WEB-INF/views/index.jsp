@@ -51,6 +51,10 @@
                                         <label class="sr-only">DEnv</label>
                                         <input type="text"class="form-control J_denv" placeholder="DEnv">
                                     </div>
+                                    <div class="form-group">
+                                        <input type="butten" class="btn btn-primary col-md-5 J_submit" hasSubmit="0" value="Begin">
+                                        <input type="butten" class="btn btn-primary col-md-5 pull-right J_run" hasSubmit="0"value="Running">
+                                    </div>
                                 </div>
                                 <div class="col-md-7">
                                     <div class="form-group to-animate">
@@ -58,12 +62,12 @@
                                         <textarea name="" id="message" cols="30" rows="5" class="form-control J_list" placeholder=""></textarea>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="butten" class="btn btn-primary col-md-5 J_submit" hasSubmit="0" value="Begin">
-                                        <input type="butten" class="btn btn-primary col-md-5 pull-right J_run" hasSubmit="0"value="Running">
-                                    </div>
-                                </div>
+                                <%--<div class="col-md-6">--%>
+                                    <%--<div class="form-group">--%>
+                                        <%--<input type="butten" class="btn btn-primary col-md-5 J_submit" hasSubmit="0" value="Begin">--%>
+                                        <%--<input type="butten" class="btn btn-primary col-md-5 pull-right J_run" hasSubmit="0"value="Running">--%>
+                                    <%--</div>--%>
+                                <%--</div>--%>
                             </div>
                         </div>
                     </div>
