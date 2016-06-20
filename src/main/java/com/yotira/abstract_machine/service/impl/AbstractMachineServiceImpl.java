@@ -49,71 +49,111 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         List<Output> outputList = new ArrayList<Output>();
         String[] stack = abstractMachineCache.getStack();
         Integer ctrlsize = abstractMachineCache.getCtrlsize();
-        while(ctrlsize > 0) {
+        while(abstractMachineCache.getCtrlsize() > 0) {
             String outList = "";
             Output output = new Output();
             // 获取当前要处理的字符串，控制语句数组的最后一个（数组是倒着存的）
-            String now = abstractMachineCache.getControl()[abstractMachineCache.getCtrlsize()-1];
-            abstractMachineCache.setCtrlsize(ctrlsize-1);
+            String[] control = abstractMachineCache.getControl();
+            String now = control[abstractMachineCache.getCtrlsize()-1];
+            abstractMachineCache.setCtrlsize(abstractMachineCache.getCtrlsize()-1);
             String fir = getfirString(now);
             if(fir.equals("ge")) {
-                if(now.length() > 2) Devide(now);
-                else gaoGe(abstractMachineCache);
+                if(now.length() > 2) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoGe(abstractMachineCache));
+                }
             }
             else if(fir.equals("se")) {
-                if(now.length() > 2) Devide(now);
-                else gaoSe(abstractMachineCache);
+                if(now.length() > 2) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoSe(abstractMachineCache));
+                }
             }
             else if(fir.equals("add")) {
-                if(now.length() > 3) Devide(now);
-                else gaoAdd(abstractMachineCache);
+                if(now.length() > 3) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoAdd(abstractMachineCache));
+                }
             }
             else if(fir.equals("sub")) {
-                if(now.length() > 3) Devide(now);
-                else gaoSub(abstractMachineCache);
+                if(now.length() > 3) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoSub(abstractMachineCache));
+                }
             }
             else if(fir.equals("mul")) {
 //				System.out.println("Debug mul!!!!" + fir);
-                if(now.length() > 3) Devide(now);
-                else gaoMul(abstractMachineCache);
+                if(now.length() > 3) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoMul(abstractMachineCache));
+                }
             }
             else if(fir.equals("div")) {
-                if(now.length() > 3) Devide(now);
-                else gaoDiv(abstractMachineCache);
+                if(now.length() > 3) {
+                    output.setRule(Devide(now));
+                }
+                else {
+                    output.setRule(gaoDiv(abstractMachineCache));
+                }
             }
             else if(fir.equals("cons")) {
                 //System.out.println("常量规则：(vs, const(c):e, sita) => (c:vs, e, sita)");
+                output.setRule(StringConstants.CONS);
                 // 常量入栈
                 Integer stacktop = abstractMachineCache.getStacktop();
-                stack[stacktop ++] = getAll(now);
+                String[] nowStack = abstractMachineCache.getStack();
+                nowStack[stacktop ++] = getAll(now);
+                abstractMachineCache.setStack(nowStack);
                 abstractMachineCache.setStacktop(stacktop);
                 abstractMachineCache.setStack(stack);
             }
             else {
                 //System.out.println("变量规则：(vs, var(c):e, sita) => (sita(x):vs, e, sita)");
+                output.setRule(StringConstants.VAR);
                 // 变量先找动态环境值，赋值后入栈
                 Integer stacktop = abstractMachineCache.getStacktop();
-                stack[stacktop ++] = String.valueOf(abstractMachineCache.getDenv().get(getAll(now)));
+                String[] nowStack = abstractMachineCache.getStack();
+                String value = String.valueOf(abstractMachineCache.getDenv().get(getAll(now)));
+                nowStack[stacktop ++] = value;
+                abstractMachineCache.setStack(nowStack);
                 abstractMachineCache.setStacktop(stacktop);
                 abstractMachineCache.setStack(stack);
             }
 
+            // 输出部分
+
+            // 控制语句部分
             String controlOut = "";
             //out = "Control: [";
-            for(int i = ctrlsize - 1; i >= 0; i --) {
+            Integer nowCtrlsize = abstractMachineCache.getCtrlsize();
+            for(int i = nowCtrlsize - 1; i >= 0; i --) {
                 controlOut += abstractMachineCache.getControl()[i];
                 if(i != 0) controlOut += ", ";
             }
             output.setControl(controlOut);
 
+            // 栈部分
             String stackOut = "";
             //out += "], Stack: [";
-            for(int i = abstractMachineCache.getStacktop() - 1; i >= 0; i --) {
-                stackOut += stack[i];
+            String[] nowStack = abstractMachineCache.getStack();
+            Integer nowStacktop = abstractMachineCache.getStacktop();
+            for(int i = nowStacktop - 1; i >= 0; i --) {
+                stackOut += nowStack[i];
                 if(i != 0) stackOut += ", ";
             }
             output.setStack(stackOut);
 
+            // 动态变量部分
             String denvOut = "";
             //out += "], DEnv: [";
             Boolean flag = false;
@@ -122,8 +162,10 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
                 flag = true;
                 denvOut += x.getKey() + "->" + String.valueOf(x.getValue());
             }
+
+            // 完整子句
             //out += "]";
-            outList = "Control:[" + outList + "],Stack:[" + stackOut + "],DEnv:[" + denvOut +"]";
+            outList = "Control:[" + controlOut + "],Stack:[" + stackOut + "],DEnv:[" + denvOut +"]";
             output.setList(outList);
             outputList.add(output);
         }
@@ -152,7 +194,9 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         String[] stack = abstractMachineCache.getStack();
         // 计算
         Integer stacktop = abstractMachineCache.getStacktop();
+        String[] nowStack = abstractMachineCache.getStack();
         stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() / stackTopTwo.getNum2());
+        abstractMachineCache.setStack(nowStack);
         abstractMachineCache.setStacktop(stacktop);
         abstractMachineCache.setStack(stack);
         return StringConstants.DEV;
@@ -162,11 +206,11 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         // TODO Auto-generated method stub
         //System.out.println("乘法规则：(n1:n2:vs, mul:e, sita) => (n:vs, e, sita), n= n1*n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
-        String[] stack = abstractMachineCache.getStack();
+        String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
-        stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() * stackTopTwo.getNum2());
+        nowStack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() * stackTopTwo.getNum2());
         abstractMachineCache.setStacktop(stacktop);
-        abstractMachineCache.setStack(stack);
+        abstractMachineCache.setStack(nowStack);
         return StringConstants.MUL;
     }
 
@@ -174,11 +218,11 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         // TODO Auto-generated method stub
         //System.out.println("减法规则：(n1:n2:vs, sub:e, sita) => (n:vs, e, sita), n= n1-n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
-        String[] stack = abstractMachineCache.getStack();
+        String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
-        stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() - stackTopTwo.getNum2());
+        nowStack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() - stackTopTwo.getNum2());
         abstractMachineCache.setStacktop(stacktop);
-        abstractMachineCache.setStack(stack);
+        abstractMachineCache.setStack(nowStack);
         return StringConstants.SUB;
     }
 
@@ -186,11 +230,11 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         // TODO Auto-generated method stub
         //System.out.println("加法规则：(n1:n2:vs, add:e, sita) => (n:vs, e, sita), n= n1+n2");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
-        String[] stack = abstractMachineCache.getStack();
+        String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
-        stack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() + stackTopTwo.getNum2());
+        nowStack[stacktop ++] = String.valueOf(stackTopTwo.getNum1() + stackTopTwo.getNum2());
         abstractMachineCache.setStacktop(stacktop);
-        abstractMachineCache.setStack(stack);
+        abstractMachineCache.setStack(nowStack);
         return StringConstants.ADD;
     }
 
@@ -198,16 +242,16 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         // TODO Auto-generated method stub
         //System.out.println("比较规则：(n1:n2:vs, se:e, sita) => (n:vs, e, sita), n = (n1<=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
-        String[] stack = abstractMachineCache.getStack();
+        String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
         if(stackTopTwo.getNum1() <= stackTopTwo.getNum2()) {
-            stack[stacktop ++] = "true";
+            nowStack[stacktop ++] = "true";
         }
         else {
-            stack[stacktop ++] = "false";
+            nowStack[stacktop ++] = "false";
         }
         abstractMachineCache.setStacktop(stacktop);
-        abstractMachineCache.setStack(stack);
+        abstractMachineCache.setStack(nowStack);
         return StringConstants.SE;
     }
 
@@ -215,14 +259,14 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         // TODO Auto-generated method stub
         //System.out.println("比较规则：(n1:n2:vs, ge:e, sita) => (n:vs, e, sita), n = (n1>=n2)");
         StackTopTwo stackTopTwo = this.getStackTopTwoNumber(abstractMachineCache);
-        String[] stack = abstractMachineCache.getStack();
+        String[] nowStack = abstractMachineCache.getStack();
         Integer stacktop = abstractMachineCache.getStacktop();
         if(stackTopTwo.getNum1() >= stackTopTwo.getNum2()){
-            stack[stacktop ++] = "true";
+            nowStack[stacktop ++] = "true";
         }
-        else stack[stacktop ++] = "false";
+        else nowStack[stacktop ++] = "false";
         abstractMachineCache.setStacktop(stacktop);
-        abstractMachineCache.setStack(stack);
+        abstractMachineCache.setStack(nowStack);
         return StringConstants.GE;
     }
 
@@ -252,7 +296,9 @@ public class AbstractMachineServiceImpl implements AbstractMachineService {
         control[ctrlsize ++] = getPartone(now);
         control[ctrlsize ++] = getParttwo(now);
 
-        abstractMachineCache.setCtrlsize(ctrlsize);
+        Integer x = ctrlsize;
+
+        abstractMachineCache.setCtrlsize(x);
         abstractMachineCache.setControl(control);
         return StringConstants.OP;
     }

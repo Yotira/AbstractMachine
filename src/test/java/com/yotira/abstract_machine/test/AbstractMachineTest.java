@@ -24,8 +24,8 @@ public class AbstractMachineTest extends AbstractTestCase{
         String control = "ge(add(var(x),mul(cons(2),var(y))),var(z))";
         String denv = "[x->34, y->7, z->50]";
         AbstractMachineCache abstractMachineCache = abstractMachineService.init(control, denv);
-        System.out.println("控制语句" + abstractMachineCache.getControl()[0]);
-        System.out.println("动态变量" + abstractMachineCache.getDenv().get("x"));
+        System.out.println("控制语句：" + abstractMachineCache.getControl()[0]);
+        System.out.println("动态变量：" + abstractMachineCache.getDenv().get("x"));
 
     }
 
@@ -37,10 +37,11 @@ public class AbstractMachineTest extends AbstractTestCase{
 
         List<Output> outputList = abstractMachineService.Run(abstractMachineCache);
         for (Output output: outputList){
-            System.out.println("控制语句" + output.getControl());
-            System.out.println("栈" + output.getStack());
-            System.out.println("完整子句" + output.getList());
-            System.out.println("当前规则" + output.getRule());
+            System.out.println("控制语句：" + output.getControl());
+            System.out.println("栈：" + output.getStack());
+            System.out.println("完整子句：" + output.getList());
+            System.out.println("当前规则：" + output.getRule());
+            System.out.println();
         }
     }
 }

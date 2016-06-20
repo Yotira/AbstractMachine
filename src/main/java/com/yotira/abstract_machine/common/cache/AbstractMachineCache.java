@@ -43,6 +43,10 @@ public class AbstractMachineCache {
     }
 
     public String[] getStack() {
+        if (this.stack == null){
+            String[] stack = new String[111];
+            this.stack = stack;
+        }
         return stack;
     }
 
